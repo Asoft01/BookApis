@@ -21,7 +21,11 @@ class ApiController extends Controller
         $book = new Book;
         $book->name =            $request->name;
         $book->isbn =            $request->isbn;
+        $book->authors =         $request->authors;
         $book->author_id =       1;
+        // $book->author_id = function(){
+        //      $request->isbn= Author::all()->random();
+        // };
         $book->number_of_pages = $request->number_of_pages;
         $book->publisher =       $request->publisher;
         $book->country =         $request->country;
@@ -29,6 +33,7 @@ class ApiController extends Controller
         $book->save();
     
             return response()->json([
+                "status"=> "success",
                 "message" => "book record created"
             ], 201);
       }
@@ -52,6 +57,7 @@ class ApiController extends Controller
           $book = book::find($id);
           $book->name = is_null($request->name) ? $book->name : $request->name;
           $book->isbn = is_null($request->isbn) ? $book->isbn : $request->isbn;
+          $book->authors = is_null($request->authors) ? $book->authors : $request->authors;
           $book->author_id = is_null($request->author_id) ? $book->author_id : $request->author_id;
           $book->number_of_pages = is_null($request->number_of_pages) ? $book->number_of_pages : $request->number_of_pages;
           $book->publisher = is_null($request->publisher) ? $book->publisher : $request->publisher;
